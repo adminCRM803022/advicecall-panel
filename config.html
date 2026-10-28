@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advice Call setup</title>
+  <style>
+    body { font-family: "Segoe UI", system-ui, Arial, sans-serif; font-size: 14px; padding: 24px; color: #242424; }
+    h1 { font-size: 18px; margin: 0 0 8px; }
+    p { margin: 0 0 8px; }
+  </style>
+</head>
+<body>
+  <h1>Advice Call panel</h1>
+  <p>Select <strong>Save</strong> to add the Advice Call panel to this meeting.</p>
+  <p>During the meeting, open it from the apps bar to see and fill in the linked advice call.</p>
+
+  <script src="vendor/MicrosoftTeams.min.js"></script>
+  <script src="settings.js"></script>
+  <script>
+    (async function () {
+      try {
+        await microsoftTeams.app.initialize();
+        var base = window.APP_SETTINGS.siteUrl;
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+          microsoftTeams.pages.config.setConfig({
+            entityId: "advicecallpanel",
+            contentUrl: base + "index.html",
+            websiteUrl: base + "index.html",
+            suggestedDisplayName: "Advice Call"
+          }).then(function () { saveEvent.notifySuccess(); })
+            .catch(function (e) { saveEvent.notifyFailure(String(e)); });
+        });
+        microsoftTeams.pages.config.setValidityState(true);
+        microsoftTeams.app.notifySuccess();
+      } catch (e) {
+        document.body.insertAdjacentHTML("beforeend", "<p>This page must be opened from Microsoft Teams.</p>");
+      }
+    })();
+  </script>
+</body>
+</html>

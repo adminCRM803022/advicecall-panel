@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advice call</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="panel-head">
+    <p class="tag">Advice call</p>
+    <h1 id="f-name"></h1>
+    <span class="rule" aria-hidden="true"></span>
+    <p class="meta" id="f-contact"></p>
+    <p class="meta" id="f-when"></p>
+  </header>
+
+  <main class="panel-body" id="app">
+
+    <section id="view-loading">
+      <p class="muted" id="loading-text">Loading advice call...</p>
+    </section>
+
+    <section id="view-signin" hidden>
+      <h2>Sign in</h2>
+      <p>Sign in to load the advice call.</p>
+      <button id="btn-signin" type="button">Sign in</button>
+      <p class="muted small" id="signin-note"></p>
+    </section>
+
+    <section id="view-notfound" hidden>
+      <h2>No advice call found</h2>
+      <p>There is no advice call linked to this meeting. Check that the meeting was created from an advice call record.</p>
+    </section>
+
+    <section id="view-error" hidden>
+      <h2>Something went wrong</h2>
+      <p id="error-text" class="error"></p>
+      <button id="btn-retry" type="button" class="secondary">Try again</button>
+    </section>
+
+    <section id="view-form" hidden>
+      <label for="f-category">Category</label>
+      <select id="f-category"></select>
+
+      <span class="field-label" id="lbl-satisfaction">Satisfactory level</span>
+      <div id="f-satisfaction" class="segmented" role="radiogroup" aria-labelledby="lbl-satisfaction"></div>
+
+      <label for="f-problem">Problem</label>
+      <textarea id="f-problem" rows="7" maxlength="100000"></textarea>
+
+      <label for="f-guidance">Guidance reference</label>
+      <textarea id="f-guidance" rows="3" maxlength="2000"></textarea>
+
+      <label for="f-next">Next action points</label>
+      <textarea id="f-next" rows="5" maxlength="10000"></textarea>
+
+      <p id="status" class="status" aria-live="polite"></p>
+    </section>
+
+    <details id="diag" class="small">
+      <summary>Technical details</summary>
+      <pre id="diag-text"></pre>
+    </details>
+
+  </main>
+
+  <script src="vendor/MicrosoftTeams.min.js"></script>
+  <script src="vendor/msal-browser.min.js"></script>
+  <script src="settings.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
